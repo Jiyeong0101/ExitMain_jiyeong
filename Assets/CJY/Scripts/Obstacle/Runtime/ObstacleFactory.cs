@@ -11,19 +11,19 @@ public class ObstacleFactory
         // 1월 - 회전 금지
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(1) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["DisableRotation"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["DisableRotation"] }
         ));
 
-        // 2월 - 블록 밀림 (기본 왼쪽으로)
+        // 2월 - 블록 밀림
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(2) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["PushBlockRandomly"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["PushBlockRandomly"] }
         ));
 
         // 3월 - 입력 지연
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(3) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["InputDelay"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["InputDelay"] }
         ));
 
         // 4~5월 - 황사 시야 차단
@@ -31,20 +31,20 @@ public class ObstacleFactory
         {
             obstacles.Add(new ObstacleRuntime(
                 new List<IObstacleCondition> { new Condition_Time(month) },
-                new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["ApplyDustStormEffect"] }
+                new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["ApplyDustStormEffect"] }
             ));
         }
 
         // 6월 - 조작 일시 정지
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(6) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["DisableControlTemporary"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["DisableControlTemporary"] }
         ));
 
         // 7월 - 스페이스 금지 + 낙하 속도 감소
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(7) },
-            new List<ObstacleEffectEntry> {
+            new List<System.Action<ObstacleGameState>> {
                 ObstacleEffectMap.EffectTable["DisableSpace"],
                 ObstacleEffectMap.EffectTable["SlowDropSpeed"]
             }
@@ -53,22 +53,20 @@ public class ObstacleFactory
         // 8월 - 다음 블록 UI 숨기기
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(8) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["HideNextBlockUI"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["HideNextBlockUI"] }
         ));
 
         // 10월 - 블록 파괴 확률
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(10) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["BreakBlockOnPlace"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["BreakBlockOnPlace"] }
         ));
 
         // 11월 - UI 스모그 오버레이
         obstacles.Add(new ObstacleRuntime(
             new List<IObstacleCondition> { new Condition_Time(11) },
-            new List<ObstacleEffectEntry> { ObstacleEffectMap.EffectTable["ApplySmogOverlay"] }
+            new List<System.Action<ObstacleGameState>> { ObstacleEffectMap.EffectTable["ApplySmogOverlay"] }
         ));
-
-        // 필요 시: 기타 커스텀 조건 방해물도 추가 가능
 
         return obstacles;
     }
